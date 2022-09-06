@@ -18,25 +18,35 @@ const MainWrapper = styled('div')({
   margin: '30px',
 })
 
-const ScoreWrapper = styled('div')({
-display: 'flex',
-justifyContent: 'space-around',
+const BoxPlayerWrapper = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
 })
 
+const BoxMachineWrapper = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+})
 
 function App(props) {
+
+const handleOnClick = (event) => {
+
+}
 
   return (
     <div>
       <Typography align="center" variant="h3" margin='50px'>ROCK - PAPER - SCISSORS GAME</Typography>
       <MainWrapper>
         <ButtonWrapper>
-          <div></div>
-          <Button variant="contained" margin='12px'>Rock</Button>
-          <Button variant="contained" margin='12px'>Paper</Button>
-          <Button variant="contained" margin='12px'>Scissors</Button>
+          <Button variant="contained" onClick={handleOnClick}>Rock</Button>
+          <Button variant="contained">Paper</Button>
+          <Button variant="contained">Scissors</Button>
+          <Typography variant="h4">SCORE</Typography>
         </ButtonWrapper>
-        <div>
+        <BoxPlayerWrapper>
           <Typography variant='h5'>PLAYER</Typography>
           <Box
             sx={{
@@ -49,9 +59,21 @@ function App(props) {
               },
             }}
           />
-        </div>
+          <Box
+            sx={{
+              width: 200,
+              height: 100,
+              margin: '30px',
+              backgroundColor: '#74b9ff',
+              '&:hover': {
+                backgroundColor: 'primary.main',
+                opacity: [0.9, 0.8, 0.7],
+              },
+            }}
+          />
+        </BoxPlayerWrapper>
         <Typography variant="h3">VS</Typography>
-        <div>
+        <BoxMachineWrapper>
           <Typography variant='h5'>MACHINE</Typography>
           <Box
             sx={{
@@ -64,33 +86,20 @@ function App(props) {
               },
             }}
           />
-        </div>
+          <Box
+            sx={{
+              width: 200,
+              height: 100,
+              margin: '30px',
+              backgroundColor: '#74b9ff',
+              '&:hover': {
+                backgroundColor: 'primary.main',
+                opacity: [0.9, 0.8, 0.7],
+              },
+            }}
+          />
+        </BoxMachineWrapper>
       </MainWrapper>
-      <ScoreWrapper>
-      <Typography variant="h4">SCORE</Typography>
-      <Box
-        sx={{
-          width: 200,
-          height: 100,
-          backgroundColor: '#74b9ff',
-          '&:hover': {
-            backgroundColor: 'primary.main',
-            opacity: [0.9, 0.8, 0.7],
-          },
-        }}
-      />
-      <Box
-        sx={{
-          width: 200,
-          height: 100,
-          backgroundColor: '#74b9ff',
-          '&:hover': {
-            backgroundColor: 'primary.main',
-            opacity: [0.9, 0.8, 0.7],
-          },
-        }}
-      />
-      </ScoreWrapper>
 
     </div>
   )
