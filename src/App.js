@@ -42,6 +42,10 @@ function App(props) {
 
   const [result, setResult] = useState()
 
+  const [userScore, setUserScore] = useState(0)
+
+  const [machineScore, setMachineScore] = useState(0)
+
   const choices = [
     { img: '/Images/Rock.png', win: 2, lose: 1 },
     { img: '/Images/Paper.png', win: 0, lose: 2 },
@@ -53,15 +57,17 @@ function App(props) {
     const randomChoice = Math.floor(Math.random() * choices.length)
     setMachineChoice(choices[randomChoice].img)
     switch (randomChoice) {
-      case choice.win: setResult('You win!')
+      case choice.win: 
+        setResult('You win!');
+        setUserScore(userScore + 1)
         break;
-      case choice.lose: setResult('You lose!')
+      case choice.lose:
+        setResult('You lose!');
+        setMachineScore(machineScore + 1)
         break;
       default: setResult("It's draw!")
         break;
     }
-
-    // console.log(choice)
   }
 
 
@@ -80,9 +86,9 @@ function App(props) {
           <CustomBox>
             <CustomImg src={userChoice} />
           </CustomBox>
-          <ScoreBox></ScoreBox>
+          <ScoreBox>{userScore}</ScoreBox>
         </BoxPlayerWrapper>
-        <div align="center">
+        <div align='center'>
           <Typography variant="h3">VS</Typography>
           <Typography variant="h2">{result}</Typography>
         </div>
@@ -91,7 +97,7 @@ function App(props) {
           <CustomBox>
             <CustomImg src={machineChoice} />
           </CustomBox>
-          <ScoreBox></ScoreBox>
+          <ScoreBox>{machineScore}</ScoreBox>
         </BoxMachineWrapper>
       </MainWrapper>
 

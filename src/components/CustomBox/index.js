@@ -7,7 +7,7 @@ export const CustomBox = styled(Box)({
     '&:hover': {
         backgroundColor: 'primary.main',
         opacity: [0.9, 0.8, 0.7],
-    }
+    },
 })
 
 
@@ -20,5 +20,8 @@ export const ScoreBox = styled(Box)({
         backgroundColor: 'primary.main',
         opacity: [0.9, 0.8, 0.7],
     },
+    fontSize: '100px',
+    fontWeight: 'bold',
+    textAlign: 'center'
 })
 
