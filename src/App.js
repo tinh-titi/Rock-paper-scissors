@@ -1,7 +1,7 @@
-import { Typography, Button, styled } from "@mui/material";
-import { Box } from "@mui/material";
-import React from "react";
-
+import { Typography, Button, styled, } from "@mui/material";
+import React, { useState } from "react";
+import { CustomBox, ScoreBox } from "./components/CustomBox";
+// import { RockImage, PaperImage, ScissorsImage } from "./components/Images";
 
 
 const ButtonWrapper = styled('div')({
@@ -9,7 +9,6 @@ const ButtonWrapper = styled('div')({
   flexDirection: 'column',
   justifyContent: 'space-around',
   width: '200px',
-  // marginBlock: '30px',
 })
 
 const MainWrapper = styled('div')({
@@ -30,74 +29,61 @@ const BoxMachineWrapper = styled('div')({
   alignItems: 'center',
 })
 
+const CustomImg = styled('img')({
+  width: '300px',
+  height: '300px',
+})
+
 function App(props) {
 
-const handleOnClick = (event) => {
+  const [userChoice, setUserChoice] = useState()
 
-}
+  const [machineChoice, setMachineChoice] = useState()
+
+  const [result, setResult] = useState()
+  // You win! You lose, It's draw!
+
+  const choices = [
+    { img: '/Images/Rock.png', title: 'Rock' },
+    { img: '/Images/Paper.png', title: 'Paper' },
+    { img: '/Images/Scissors.png', title: 'Scissors' }
+  ]
+
+  const handleOnClick = (img) => {
+    setUserChoice(img)
+    const randomChoice = choices[Math.floor(Math.random() * choices.length)].img
+    setMachineChoice(randomChoice)
+    setResult()
+    console.log(img)
+  }
 
   return (
     <div>
       <Typography align="center" variant="h3" margin='50px'>ROCK - PAPER - SCISSORS GAME</Typography>
       <MainWrapper>
         <ButtonWrapper>
-          <Button variant="contained" onClick={handleOnClick}>Rock</Button>
-          <Button variant="contained">Paper</Button>
-          <Button variant="contained">Scissors</Button>
+          <Button variant="contained" onClick={() => handleOnClick(choices[0].img)}>Rock</Button>
+          <Button variant="contained" onClick={() => handleOnClick(choices[1].img)}>Paper</Button>
+          <Button variant="contained" onClick={() => handleOnClick(choices[2].img)}>Scissors</Button>
           <Typography variant="h4">SCORE</Typography>
         </ButtonWrapper>
         <BoxPlayerWrapper>
           <Typography variant='h5'>PLAYER</Typography>
-          <Box
-            sx={{
-              width: 300,
-              height: 300,
-              backgroundColor: '#48dbfb',
-              '&:hover': {
-                backgroundColor: 'primary.main',
-                opacity: [0.9, 0.8, 0.7],
-              },
-            }}
-          />
-          <Box
-            sx={{
-              width: 200,
-              height: 100,
-              margin: '30px',
-              backgroundColor: '#74b9ff',
-              '&:hover': {
-                backgroundColor: 'primary.main',
-                opacity: [0.9, 0.8, 0.7],
-              },
-            }}
-          />
+          <CustomBox>
+            <CustomImg src={userChoice} />
+          </CustomBox>
+          <ScoreBox></ScoreBox>
         </BoxPlayerWrapper>
-        <Typography variant="h3">VS</Typography>
+        <div align="center">
+          <Typography variant="h3">VS</Typography>
+          <Typography variant="h2">{result}</Typography>
+        </div>
         <BoxMachineWrapper>
           <Typography variant='h5'>MACHINE</Typography>
-          <Box
-            sx={{
-              width: 300,
-              height: 300,
-              backgroundColor: '#48dbfb',
-              '&:hover': {
-                backgroundColor: 'primary.main',
-                opacity: [0.9, 0.8, 0.7],
-              },
-            }}
-          />
-          <Box
-            sx={{
-              width: 200,
-              height: 100,
-              margin: '30px',
-              backgroundColor: '#74b9ff',
-              '&:hover': {
-                backgroundColor: 'primary.main',
-                opacity: [0.9, 0.8, 0.7],
-              },
-            }}
-          />
+          <CustomBox>
+            <CustomImg src={machineChoice} />
+            </CustomBox>
+          <ScoreBox></ScoreBox>
         </BoxMachineWrapper>
       </MainWrapper>
 
