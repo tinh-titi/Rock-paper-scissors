@@ -41,30 +41,38 @@ function App(props) {
   const [machineChoice, setMachineChoice] = useState()
 
   const [result, setResult] = useState()
-  // You win! You lose, It's draw!
 
   const choices = [
-    { img: '/Images/Rock.png', title: 'Rock' },
-    { img: '/Images/Paper.png', title: 'Paper' },
-    { img: '/Images/Scissors.png', title: 'Scissors' }
+    { img: '/Images/Rock.png', win: 2, lose: 1 },
+    { img: '/Images/Paper.png', win: 0, lose: 2 },
+    { img: '/Images/Scissors.png', win: 1, lose: 0 }
   ]
 
-  const handleOnClick = (img) => {
-    setUserChoice(img)
-    const randomChoice = choices[Math.floor(Math.random() * choices.length)].img
-    setMachineChoice(randomChoice)
-    setResult()
-    console.log(img)
+  const handleOnClick = (choice) => {
+    setUserChoice(choice.img)
+    const randomChoice = Math.floor(Math.random() * choices.length)
+    setMachineChoice(choices[randomChoice].img)
+    switch (randomChoice) {
+      case choice.win: setResult('You win!')
+        break;
+      case choice.lose: setResult('You lose!')
+        break;
+      default: setResult("It's draw!")
+        break;
+    }
+
+    // console.log(choice)
   }
+
 
   return (
     <div>
       <Typography align="center" variant="h3" margin='50px'>ROCK - PAPER - SCISSORS GAME</Typography>
       <MainWrapper>
         <ButtonWrapper>
-          <Button variant="contained" onClick={() => handleOnClick(choices[0].img)}>Rock</Button>
-          <Button variant="contained" onClick={() => handleOnClick(choices[1].img)}>Paper</Button>
-          <Button variant="contained" onClick={() => handleOnClick(choices[2].img)}>Scissors</Button>
+          <Button variant="contained" onClick={() => handleOnClick(choices[0])}>Rock</Button>
+          <Button variant="contained" onClick={() => handleOnClick(choices[1])}>Paper</Button>
+          <Button variant="contained" onClick={() => handleOnClick(choices[2])}>Scissors</Button>
           <Typography variant="h4">SCORE</Typography>
         </ButtonWrapper>
         <BoxPlayerWrapper>
@@ -82,7 +90,7 @@ function App(props) {
           <Typography variant='h5'>MACHINE</Typography>
           <CustomBox>
             <CustomImg src={machineChoice} />
-            </CustomBox>
+          </CustomBox>
           <ScoreBox></ScoreBox>
         </BoxMachineWrapper>
       </MainWrapper>
