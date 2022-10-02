@@ -1,4 +1,4 @@
-import { Typography, Button, styled, } from "@mui/material";
+import { Typography, Button, styled, GlobalStyles} from "@mui/material";
 import React, { useState } from "react";
 import { CustomBox, ScoreBox } from "./components/CustomBox";
 import { ThemeProvider } from "@mui/material";
@@ -7,10 +7,11 @@ import { violetTheme, beigeTheme } from "./config/theme";
 const AppWrapper = styled('div')(({ theme }) => ({
   background: theme.palette.backgroundColor,
   color: theme.palette.Text,
+  height: '100vh',
 }))
 
 const ButtonWrapper = styled('div')(({theme}) => ({
-  color: theme.palette.buttonColor,
+  "& button": theme.palette.buttonColor,
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-around',
@@ -24,14 +25,12 @@ const MainWrapper = styled('div')({
 })
 
 const BoxPlayerWrapper = styled('div')(({theme}) => ({
-  color: theme.palette.boxColor,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
 }))
 
 const BoxMachineWrapper = styled('div')(({theme}) => ({
-  color: theme.palette.boxColor,
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -43,6 +42,8 @@ const CustomImg = styled('img')({
 })
 
 function App(props) {
+  
+  const [isVioletTheme, setIsVioletTheme] = useState(true)
 
   const [userChoice, setUserChoice] = useState()
 
@@ -78,7 +79,6 @@ function App(props) {
     }
   }
 
-  const [isVioletTheme, setIsVioletTheme] = useState(true)
 
   const handleChangeThemeOnClick = (event) => {
     setIsVioletTheme(!isVioletTheme)
@@ -87,6 +87,7 @@ function App(props) {
 
   return (
     <ThemeProvider theme={isVioletTheme ? violetTheme : beigeTheme}>
+      <GlobalStyles styles={{ body: {margin: "0px"}}}/>
       <AppWrapper>
         <Button onClick={handleChangeThemeOnClick}>THEME</Button>
         <Typography align="center" variant="h3" margin='40px'>ROCK - PAPER - SCISSORS GAME</Typography>
